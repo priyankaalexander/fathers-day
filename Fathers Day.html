@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appa’s Journey</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdfaf6;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+      background-color: #f0e6d6;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .section {
+      padding: 2rem;
+      border-bottom: 1px solid #e0dcd5;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .drawing {
+      width: 80px;
+      height: 80px;
+      background-color: #ddd;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #666;
+    }
+    .text {
+      flex: 1;
+      font-size: 1.1rem;
+    }
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background-color: #f0e6d6;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <header style="background: linear-gradient(90deg, #f7c873 0%, #f0a36e 100%); border-radius: 0 0 32px 32px; box-shadow: 0 4px 24px #e0dcd5;">
+    <h1 style="font-size: 3rem; font-family: 'Pacifico', 'Comic Sans MS', 'Segoe UI', 'Georgia', serif; font-weight: 400; color: #7a5c2e; margin-bottom: 0.5rem; letter-spacing: 1px;">
+       Happy Father’s Day, Appa
+    </h1>
+    <p style="font-size: 1.25rem; color: #7a5c2e; margin: 0; font-family: 'Quicksand', 'Georgia', serif; letter-spacing: 0.5px; font-weight: 400; font-style: italic;"></p>
+      Your journey is our inspiration.
+    </p>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand:400,700&display=swap" rel="stylesheet">
+  </header>
+<div id="slideshow" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
+    <img id="slideshow-img" src="" alt="Family Photo Slideshow" style="max-width: 350px; max-height: 250px; border-radius: 12px; box-shadow: 0 2px 8px #ccc; margin-bottom: 0.5rem; background: #eee;">
+    <div>
+        <button id="prev-btn" style="margin-right: 1rem;">Previous</button>
+        <button id="next-btn">Next</button>
+    </div>
+</div>
+<script>
+  // List of image filenames and corresponding captions
+  const slides = [
+    {
+      img: "1.png",
+      caption: "As a boy in South India, you walked under the summer sun to chilli farms, sharing fermented rice and plucked chillies with your family. A memory as warm as the land itself."
+    },
+    {
+      img: "2.png",
+      caption: "In New Delhi, you built a family — married in your late twenties, raised two daughters, and worked hard in catering, always bringing home little treats for us."
+    },
+    {
+      img: "3.png",
+      caption: "For a time, you braved the oil rigs of Kazakhstan — a place far from home, but a chapter of courage and grit."
+    },
+    {
+      img: "5.png",
+      caption: "In Dubai, you rose from camp supervisor to manager — suddenly and powerfully. We lived well, learned well, and saw your dreams bloom into reality."
+    },
+    {
+      img: "6.png",
+      caption: "You returned to India and started your own business. COVID hit hard, but you carried on with determination and grace."
+    },
+    {
+      img: "7.png",
+      caption: "Now in your 60s, you showed incredible strength and hard work by moving to Abu Dhabi and starting from scratch all over again — proving that your determination and spirit never fade."
+    }
+  ];
+  let current = 0;
+  const imgEl = document.getElementById('slideshow-img');
+  const captionEl = document.createElement('p');
+  captionEl.id = "slideshow-caption";
+  captionEl.style.maxWidth = "500px";
+  captionEl.style.textAlign = "center";
+  captionEl.style.margin = "0.5rem 0 0 0";
+  imgEl.parentNode.insertBefore(captionEl, imgEl.nextSibling);
+
+  // Make slideshow bigger
+  imgEl.style.maxWidth = "500px";
+  imgEl.style.maxHeight = "350px";
+
+  function showSlide(idx) {
+    imgEl.src = slides[idx].img;
+    captionEl.textContent = slides[idx].caption;
+  }
+  document.getElementById('prev-btn').onclick = function() {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  };
+  document.getElementById('next-btn').onclick = function() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  };
+  // Initialize
+  if (slides.length > 0) showSlide(current);
+  else {
+    imgEl.alt = "No photos found.";
+    captionEl.textContent = "";
+  }
+</script>
+<style>
+  #slideshow {
+    background: linear-gradient(135deg, #f8e8d8 0%, #f0e6d6 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #e0dcd5;
+    padding: 2rem 1rem 1.5rem 1rem;
+    margin-top: 2rem;
+  }
+  #slideshow-img {
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  #slideshow-img:hover {
+    box-shadow: 0 8px 32px #bfae9e;
+    transform: scale(1.03);
+  }
+  #slideshow button {
+    background: linear-gradient(90deg, #f7c873 0%, #f0a36e 100%);
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 0.7rem 2.2rem;
+    font-size: 1.1rem;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    margin: 0 0.5rem;
+    box-shadow: 0 2px 8px #e0dcd5;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    outline: none;
+    letter-spacing: 1px;
+  }
+  #slideshow button:hover, #slideshow button:focus {
+    background: linear-gradient(90deg, #e2cfc2 0%, #f7c873 100%);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 16px #e0dcd5;
+  }
+  #slideshow > div {
+    margin-top: 1.2rem;
+  }
+  #slideshow-caption {
+    font-size: 1.08rem;
+    color: #7a5c2e;
+    background: #fff8ef;
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    margin-top: 1rem;
+    box-shadow: 0 1px 4px #e0dcd5;
+    font-style: italic;
+  }
+</style>
+
+ 
+
+  <footer>
+    Appa, you’ve come so far — and we are proud. <br />
+    Your journey is not forgotten. Thank you for everything. 💛
+  </footer>
+
+</body>
+</html>
